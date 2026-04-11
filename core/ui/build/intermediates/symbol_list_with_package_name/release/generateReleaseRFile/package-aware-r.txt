@@ -1,0 +1,4 @@
+com.sundram.expense_tracker.ui
+string ui_back
+string ui_loading
+string ui_retry

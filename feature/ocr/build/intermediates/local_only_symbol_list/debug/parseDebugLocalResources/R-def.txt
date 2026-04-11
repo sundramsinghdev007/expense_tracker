@@ -1,0 +1,12 @@
+R_DEF: Internal format may change without notice
+local
+string ocr_confirm
+string ocr_extracted_amount_label
+string ocr_extracted_date_label
+string ocr_extracted_title_label
+string ocr_permission_denied
+string ocr_retry
+string ocr_review_title
+string ocr_scanning
+string ocr_shutter_cd
+string ocr_title

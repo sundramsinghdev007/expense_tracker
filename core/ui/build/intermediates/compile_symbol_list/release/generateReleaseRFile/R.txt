@@ -1,0 +1,3 @@
+int string ui_back 0x0
+int string ui_loading 0x0
+int string ui_retry 0x0

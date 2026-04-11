@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="analytics_title">Analytics</string>
+    <string name="analytics_total_spend_label">Total spend</string>
+    <string name="analytics_period_week">Week</string>
+    <string name="analytics_period_month">Month</string>
+    <string name="analytics_period_year">Year</string>
+    <string name="analytics_no_data">No data for this period</string>
+    <string name="analytics_trend_up_cd">Trend: spending increasing</string>
+    <string name="analytics_trend_down_cd">Trend: spending decreasing</string>
+    <string name="analytics_trend_flat_cd">Trend: spending stable</string>
+    <string name="analytics_chart_category_title">Spending by Category</string>
+    <string name="analytics_chart_daily_title">Daily Spending</string>
+</resources>

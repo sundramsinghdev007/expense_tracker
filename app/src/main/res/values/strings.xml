@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Expense Tracker</string>
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_analytics">Analytics</string>
+    <string name="nav_budgets">Budgets</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_dashboard_cd">Dashboard tab</string>
+    <string name="nav_analytics_cd">Analytics tab</string>
+    <string name="nav_budgets_cd">Budgets tab</string>
+    <string name="nav_settings_cd">Settings tab</string>
+    <string name="notification_channel_budget_alert_name">Budget Alerts</string>
+    <string name="notification_channel_budget_alert_desc">Notifies when a monthly budget limit is exceeded</string>
+</resources>

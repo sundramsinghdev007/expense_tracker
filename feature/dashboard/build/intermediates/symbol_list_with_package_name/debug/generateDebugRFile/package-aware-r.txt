@@ -1,0 +1,19 @@
+com.sundram.expense_tracker.dashboard
+string dashboard_add_expense_cd
+string dashboard_amount_cd
+string dashboard_budget_alert_amounts
+string dashboard_budget_alert_icon_cd
+string dashboard_budget_alerts_title
+string dashboard_empty_message
+string dashboard_expense_amount_cd
+string dashboard_filter_day
+string dashboard_filter_month
+string dashboard_filter_year
+string dashboard_recent_expenses
+string dashboard_retry_label
+string dashboard_scan_receipt_cd
+string dashboard_title
+string dashboard_top_category_label
+string dashboard_total_this_month
+string dashboard_total_this_year
+string dashboard_total_today

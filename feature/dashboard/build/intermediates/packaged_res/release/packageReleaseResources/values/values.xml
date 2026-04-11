@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dashboard_add_expense_cd">Add expense</string>
+    <string name="dashboard_amount_cd">Total this month: ₹%.2f</string>
+    <string name="dashboard_budget_alert_amounts">₹%.0f spent of ₹%.0f limit</string>
+    <string name="dashboard_budget_alert_icon_cd">Budget exceeded for %s</string>
+    <string name="dashboard_budget_alerts_title">Budget Alerts</string>
+    <string name="dashboard_empty_message">No expenses yet. Tap + to add one!</string>
+    <string name="dashboard_expense_amount_cd">Amount: ₹%.2f</string>
+    <string name="dashboard_filter_day">Day</string>
+    <string name="dashboard_filter_month">Month</string>
+    <string name="dashboard_filter_year">Year</string>
+    <string name="dashboard_recent_expenses">Recent Expenses</string>
+    <string name="dashboard_retry_label">Retry</string>
+    <string name="dashboard_scan_receipt_cd">Scan receipt</string>
+    <string name="dashboard_title">Dashboard</string>
+    <string name="dashboard_top_category_label">Top category</string>
+    <string name="dashboard_total_this_month">Total this month</string>
+    <string name="dashboard_total_this_year">Total this year</string>
+    <string name="dashboard_total_today">Total today</string>
+</resources>

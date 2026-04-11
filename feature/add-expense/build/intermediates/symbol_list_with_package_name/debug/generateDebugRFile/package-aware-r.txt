@@ -1,0 +1,16 @@
+com.sundram.expense_tracker.addexpense
+drawable ic_budget_alert
+string add_expense_amount_hint
+string add_expense_amount_label
+string add_expense_budget_exceeded_body
+string add_expense_budget_exceeded_title
+string add_expense_category_label
+string add_expense_date_label
+string add_expense_date_picker_cd
+string add_expense_error_generic
+string add_expense_notes_label
+string add_expense_save
+string add_expense_title
+string add_expense_title_label
+string add_expense_validation_amount_invalid
+string add_expense_validation_title_blank

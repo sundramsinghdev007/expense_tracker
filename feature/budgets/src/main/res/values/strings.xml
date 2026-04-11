@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="budgets_title">Budgets</string>
+    <string name="budgets_empty">No budgets yet. Tap + to create one!</string>
+    <string name="budgets_add_cd">Add budget</string>
+    <string name="budgets_add_title">New Budget</string>
+    <string name="budgets_limit_amount_label">Monthly limit</string>
+    <string name="budgets_save">Save Budget</string>
+    <string name="budgets_over_budget">Over budget!</string>
+    <string name="budgets_spent_label">Spent: %1$s</string>
+    <string name="budgets_limit_label">Limit: %1$s</string>
+    <string name="budgets_category_label">Category</string>
+    <string name="budgets_progress_cd">Budget progress: %1$d%%</string>
+    <string name="budgets_remaining_label">%1$s left</string>
+</resources>
