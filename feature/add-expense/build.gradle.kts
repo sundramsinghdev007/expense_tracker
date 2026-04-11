@@ -16,5 +16,6 @@ dependencies {
     implementation(project(":core:ui"))
 
     testImplementation(libs.bundles.testing)
-    testImplementation(libs.junit5.engine)
+    testRuntimeOnly(libs.junit5.engine)
+    testRuntimeOnly(libs.junit5.launcher)
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.7.2" type="partial_results">
+    <map id="NotificationPermission">
+        <entry
+            name="source"
+            boolean="true"/>
+    </map>
+    <map id="UnusedResources">
+        <location id="R.string.add_expense_amount_hint"
+            file="${:feature:add-expense*debug*MAIN*sourceProvider*0*resDir*0}/values/strings.xml"
+            line="6"
+            column="13"
+            startOffset="239"
+            endLine="6"
+            endColumn="43"
+            endOffset="269"/>
+        <location id="R.string.add_expense_category_label"
+            file="${:feature:add-expense*debug*MAIN*sourceProvider*0*resDir*0}/values/strings.xml"
+            line="11"
+            column="13"
+            startOffset="551"
+            endLine="11"
+            endColumn="46"
+            endOffset="584"/>
+        <entry
+            name="model"
+            string="drawable[ic_budget_alert(U)],string[add_expense_title(U),add_expense_title_label(U),add_expense_amount_label(U),add_expense_amount_hint(D),add_expense_notes_label(U),add_expense_date_label(U),add_expense_date_picker_cd(U),add_expense_save(U),add_expense_category_label(D),add_expense_validation_title_blank(U),add_expense_validation_amount_invalid(U),add_expense_error_generic(U),add_expense_budget_exceeded_title(U),add_expense_budget_exceeded_body(U)];;;;"/>
+    </map>
+
+</incidents>

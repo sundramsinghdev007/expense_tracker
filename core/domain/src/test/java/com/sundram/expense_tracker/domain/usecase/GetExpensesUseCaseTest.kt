@@ -2,32 +2,22 @@
 package com.sundram.expense_tracker.domain.usecase
 
 import app.cash.turbine.test
-import io.mockk.*
-import io.mockk.junit5.MockKExtension
+import io.mockk.every
+import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import java.time.LocalDate
-import java.time.YearMonth
-import com.sundram.expense_tracker.domain.model.*
-import com.sundram.expense_tracker.domain.repository.*
-import com.sundram.expense_tracker.domain.usecase.*
+import com.sundram.expense_tracker.domain.model.Category
+import com.sundram.expense_tracker.domain.model.Expense
+import com.sundram.expense_tracker.domain.repository.ExpenseRepository
 
-@ExtendWith(MockKExtension::class)
 class GetExpensesUseCaseTest {
 
-    @io.mockk.MockK
-    lateinit var repository: ExpenseRepository
-
-    private lateinit var useCase: GetExpensesUseCase
-
-    @BeforeEach
-    fun setUp() {
-        useCase = GetExpensesUseCase(repository)
-    }
+    private val repository: ExpenseRepository = mockk()
+    private val useCase = GetExpensesUseCase(repository)
 
     @Test
     fun `invoke returns mapped flow from repository`() = runTest {

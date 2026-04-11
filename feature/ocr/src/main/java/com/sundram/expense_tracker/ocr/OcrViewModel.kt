@@ -2,6 +2,7 @@
 package com.sundram.expense_tracker.ocr
 
 import android.content.Context
+import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageProxy
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -29,6 +30,7 @@ class OcrViewModel @Inject constructor(
      * Processes a CameraX [ImageProxy] through ML Kit text recognition.
      * Closes the proxy when recognition completes (success or failure).
      */
+    @ExperimentalGetImage
     fun processImage(imageProxy: ImageProxy): Unit {
         viewModelScope.launch {
             _uiState.update { it.copy(isScanning = true, errorMessage = null) }

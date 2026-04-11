@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" tests="23" skipped="0" failures="0" errors="0" timestamp="2026-04-11T16:42:08.864Z" hostname="Sundrams-MacBook-Pro.local" time="2.632">
+  <properties/>
+  <testcase name="saveExpense sets isLoading false after successful save()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.786"/>
+  <testcase name="saveExpense emits isSaved true on use case success()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.01"/>
+  <testcase name="saveExpense stores amount validation error when amount is invalid()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.006"/>
+  <testcase name="saveExpense emits NavigateBack event on success()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.028"/>
+  <testcase name="onAmountChange updates uiState amount()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.002"/>
+  <testcase name="saveExpense stores title validation error when title is blank()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.004"/>
+  <testcase name="saveExpense does not call use case when amount is negative()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.013"/>
+  <testcase name="onTitleChange updates uiState title()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.003"/>
+  <testcase name="initial uiState has empty title and amount()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.008"/>
+  <testcase name="saveExpense emits BudgetExceeded then NavigateBack when budget is exceeded()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.015"/>
+  <testcase name="saveExpense does not call use case when title is blank()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.005"/>
+  <testcase name="saveExpense emits ShowSnackbar on use case failure()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.006"/>
+  <testcase name="saveExpense does not emit NavigateBack when title is blank()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.003"/>
+  <testcase name="initial uiState selectedCategory defaults to OTHER()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.002"/>
+  <testcase name="saveExpense does not call use case when amount is zero()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.005"/>
+  <testcase name="saveExpense does not call use case when amount is not a number()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.004"/>
+  <testcase name="saveExpense passes trimmed title to use case()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.006"/>
+  <testcase name="saveExpense sets isLoading false after use case failure()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.003"/>
+  <testcase name="onDateChange updates uiState date()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.001"/>
+  <testcase name="initial uiState has isSaved false and isLoading false()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.002"/>
+  <testcase name="onNotesChange updates uiState notes()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.002"/>
+  <testcase name="saveExpense ShowSnackbar carries a non-zero resource id on failure()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.005"/>
+  <testcase name="onCategoryChange updates uiState selectedCategory()" classname="com.sundram.expense_tracker.addexpense.AddExpenseViewModelTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sundram.expense_tracker.domain.usecase.UpsertBudgetUseCaseTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-04-11T16:42:11.167Z" hostname="Sundrams-MacBook-Pro.local" time="0.044">
+  <properties/>
+  <testcase name="invoke delegates to BudgetRepository()" classname="com.sundram.expense_tracker.domain.usecase.UpsertBudgetUseCaseTest" time="0.021"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

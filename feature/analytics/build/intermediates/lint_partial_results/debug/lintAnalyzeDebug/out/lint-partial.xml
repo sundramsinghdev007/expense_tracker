@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.7.2" type="partial_results">
+    <map id="UnusedResources">
+        <location id="R.string.analytics_chart_daily_title"
+            file="${:feature:analytics*debug*MAIN*sourceProvider*0*resDir*0}/values/strings.xml"
+            line="13"
+            column="13"
+            startOffset="733"
+            endLine="13"
+            endColumn="47"
+            endOffset="767"/>
+        <entry
+            name="model"
+            string="string[analytics_title(U),analytics_total_spend_label(U),analytics_period_week(U),analytics_period_month(U),analytics_period_year(U),analytics_no_data(U),analytics_trend_up_cd(U),analytics_trend_down_cd(U),analytics_trend_flat_cd(U),analytics_chart_category_title(U),analytics_chart_daily_title(D)];;;;"/>
+    </map>
+
+</incidents>

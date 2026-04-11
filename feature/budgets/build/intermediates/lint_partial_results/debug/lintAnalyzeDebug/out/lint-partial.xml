@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.7.2" type="partial_results">
+    <map id="UnusedResources">
+        <entry
+            name="model"
+            string="string[budgets_title(U),budgets_empty(U),budgets_add_cd(U),budgets_add_title(U),budgets_limit_amount_label(U),budgets_save(U),budgets_over_budget(U),budgets_spent_label(U),budgets_limit_label(U),budgets_category_label(U),budgets_progress_cd(U),budgets_remaining_label(U)];;;;"/>
+    </map>
+
+</incidents>

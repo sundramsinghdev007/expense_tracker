@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.7.2" type="partial_results">
+    <map id="UnusedResources">
+        <entry
+            name="model"
+            string="string[settings_title(U),settings_currency_title(U),settings_currency_picker_title(U),settings_theme_title(U),settings_theme_light(U),settings_theme_dark(U),settings_theme_system(U),settings_notifications_title(U),settings_notifications_on(U),settings_notifications_off(U),settings_export_title(U),settings_export_subtitle(U),settings_version_title(U),settings_close(U)];;;;"/>
+    </map>
+
+</incidents>

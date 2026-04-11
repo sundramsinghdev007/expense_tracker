@@ -1,6 +1,8 @@
 // feature/ocr/src/main/java/com/sundram/expense_tracker/ocr/OcrScanScreen.kt
 package com.sundram.expense_tracker.ocr
 
+import android.annotation.SuppressLint
+import androidx.camera.core.ExperimentalGetImage
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -22,6 +24,7 @@ import com.sundram.expense_tracker.ui.component.LoadingIndicator
  * Auto-navigates to the add-expense flow once both [OcrUiState.extractedTitle]
  * and [OcrUiState.extractedAmount] are non-blank.
  */
+@SuppressLint("UnsafeOptInUsageError")
 @Composable
 fun OcrScanScreen(
     onNavigateToAddExpense: (title: String, amount: String, date: String) -> Unit,

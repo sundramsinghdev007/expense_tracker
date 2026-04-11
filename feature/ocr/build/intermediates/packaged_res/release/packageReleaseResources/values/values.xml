@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ocr_confirm">Confirm</string>
+    <string name="ocr_extracted_amount_label">Amount</string>
+    <string name="ocr_extracted_date_label">Date</string>
+    <string name="ocr_extracted_title_label">Merchant / Title</string>
+    <string name="ocr_permission_denied">Camera permission is required to scan receipts</string>
+    <string name="ocr_retry">Grant Permission</string>
+    <string name="ocr_review_title">Review Extracted Data</string>
+    <string name="ocr_scanning">Scanning…</string>
+    <string name="ocr_shutter_cd">Take photo</string>
+    <string name="ocr_title">Scan Receipt</string>
+</resources>
