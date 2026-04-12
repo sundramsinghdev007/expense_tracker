@@ -22,16 +22,20 @@ All of this runs without you manually intervening between steps.
 
 ---
 
-## System Architecture — 4 Layers
+## System Architecture — 5 Layers
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
+│  Layer 5 — Fully Agentic Pipeline (NEW)                     │
+│  GitHub Issue label → auto-implement.yml OR webhook-server  │
+│  Zero human steps from issue to PR / deployed feature       │
+├─────────────────────────────────────────────────────────────┤
 │  Layer 4 — GitHub Actions (CI/CD)                           │
 │  architecture-check.yml + claude-review.yml                 │
 │  Runs on every PR: rule enforcement + AI code review        │
 ├─────────────────────────────────────────────────────────────┤
 │  Layer 3 — Headless Agent CLI                               │
-│  scripts/agent.sh                                           │
+│  scripts/agent.sh + scripts/webhook-server.py               │
 │  Dispatches Claude to implement/fix/deploy/review           │
 ├─────────────────────────────────────────────────────────────┤
 │  Layer 2 — Claude Code Hooks  (.claude/settings.json)       │
@@ -40,9 +44,12 @@ All of this runs without you manually intervening between steps.
 ├─────────────────────────────────────────────────────────────┤
 │  Layer 1 — Claude Code Skills  (.claude/skills/)            │
 │  /implement-feature  /fix-build-error  /deploy-and-verify   │
-│  Prompt templates that encode the full development workflow  │
+│  /implement-and-pr   (CI-optimised, used by Layer 5)        │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+> **Layer 5 is what makes this truly agentic** — the only human action required is applying a GitHub label.
+> See [USER_GUIDE.md](USER_GUIDE.md) for setup and usage instructions.
 
 ---
 
