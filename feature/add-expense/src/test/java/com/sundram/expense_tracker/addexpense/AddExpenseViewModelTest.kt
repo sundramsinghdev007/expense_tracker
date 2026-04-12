@@ -3,12 +3,11 @@ package com.sundram.expense_tracker.addexpense
 
 import app.cash.turbine.test
 import com.sundram.expense_tracker.domain.model.Category
-import com.sundram.expense_tracker.domain.model.Expense
 import com.sundram.expense_tracker.domain.usecase.AddExpenseUseCase
+import com.sundram.expense_tracker.domain.usecase.CheckBudgetAfterExpenseUseCase
 import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.junit5.MockKExtension
-import io.mockk.MockK
+import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -19,24 +18,23 @@ import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import java.time.LocalDate
 
 @OptIn(ExperimentalCoroutinesApi::class)
-@ExtendWith(MockKExtension::class)
 class AddExpenseViewModelTest {
 
     private val testDispatcher = UnconfinedTestDispatcher()
-
-    @MockK
-    lateinit var addExpenseUseCase: AddExpenseUseCase
+    private val addExpenseUseCase: AddExpenseUseCase = mockk()
+    private val checkBudgetAfterExpenseUseCase: CheckBudgetAfterExpenseUseCase = mockk()
 
     @BeforeEach
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
+        coEvery { checkBudgetAfterExpenseUseCase(any()) } returns false
     }
 
     @AfterEach
@@ -44,30 +42,29 @@ class AddExpenseViewModelTest {
         Dispatchers.resetMain()
     }
 
+    private fun createVm() = AddExpenseViewModel(addExpenseUseCase, checkBudgetAfterExpenseUseCase)
+
     // -------------------------------------------------------------------------
     // Initial state
     // -------------------------------------------------------------------------
 
     @Test
     fun `initial uiState has empty title and amount`() = runTest {
-        val vm = AddExpenseViewModel(addExpenseUseCase)
-
+        val vm = createVm()
         assertEquals("", vm.uiState.value.title)
         assertEquals("", vm.uiState.value.amount)
     }
 
     @Test
     fun `initial uiState has isSaved false and isLoading false`() = runTest {
-        val vm = AddExpenseViewModel(addExpenseUseCase)
-
+        val vm = createVm()
         assertFalse(vm.uiState.value.isSaved)
         assertFalse(vm.uiState.value.isLoading)
     }
 
     @Test
     fun `initial uiState selectedCategory defaults to OTHER`() = runTest {
-        val vm = AddExpenseViewModel(addExpenseUseCase)
-
+        val vm = createVm()
         assertEquals(Category.OTHER, vm.uiState.value.selectedCategory)
     }
 
@@ -77,47 +74,37 @@ class AddExpenseViewModelTest {
 
     @Test
     fun `onTitleChange updates uiState title`() = runTest {
-        val vm = AddExpenseViewModel(addExpenseUseCase)
-
+        val vm = createVm()
         vm.onTitleChange("Lunch")
-
         assertEquals("Lunch", vm.uiState.value.title)
     }
 
     @Test
     fun `onAmountChange updates uiState amount`() = runTest {
-        val vm = AddExpenseViewModel(addExpenseUseCase)
-
+        val vm = createVm()
         vm.onAmountChange("250.0")
-
         assertEquals("250.0", vm.uiState.value.amount)
     }
 
     @Test
     fun `onCategoryChange updates uiState selectedCategory`() = runTest {
-        val vm = AddExpenseViewModel(addExpenseUseCase)
-
+        val vm = createVm()
         vm.onCategoryChange(Category.FOOD)
-
         assertEquals(Category.FOOD, vm.uiState.value.selectedCategory)
     }
 
     @Test
     fun `onDateChange updates uiState date`() = runTest {
-        val vm = AddExpenseViewModel(addExpenseUseCase)
+        val vm = createVm()
         val newDate = LocalDate.of(2026, 3, 15)
-
         vm.onDateChange(newDate)
-
         assertEquals(newDate, vm.uiState.value.date)
     }
 
     @Test
     fun `onNotesChange updates uiState notes`() = runTest {
-        val vm = AddExpenseViewModel(addExpenseUseCase)
-
+        val vm = createVm()
         vm.onNotesChange("Work lunch")
-
         assertEquals("Work lunch", vm.uiState.value.notes)
     }
 
@@ -128,7 +115,7 @@ class AddExpenseViewModelTest {
     @Test
     fun `saveExpense emits isSaved true on use case success`() = runTest {
         coEvery { addExpenseUseCase(any()) } returns Result.success(1L)
-        val vm = AddExpenseViewModel(addExpenseUseCase)
+        val vm = createVm()
         vm.onTitleChange("Coffee")
         vm.onAmountChange("150.0")
 
@@ -141,7 +128,7 @@ class AddExpenseViewModelTest {
     @Test
     fun `saveExpense emits NavigateBack event on success`() = runTest {
         coEvery { addExpenseUseCase(any()) } returns Result.success(1L)
-        val vm = AddExpenseViewModel(addExpenseUseCase)
+        val vm = createVm()
         vm.onTitleChange("Coffee")
         vm.onAmountChange("150.0")
 
@@ -156,7 +143,7 @@ class AddExpenseViewModelTest {
     @Test
     fun `saveExpense sets isLoading false after successful save`() = runTest {
         coEvery { addExpenseUseCase(any()) } returns Result.success(1L)
-        val vm = AddExpenseViewModel(addExpenseUseCase)
+        val vm = createVm()
         vm.onTitleChange("Coffee")
         vm.onAmountChange("150.0")
 
@@ -166,6 +153,23 @@ class AddExpenseViewModelTest {
         assertFalse(vm.uiState.value.isLoading)
     }
 
+    @Test
+    fun `saveExpense emits BudgetExceeded then NavigateBack when budget is exceeded`() = runTest {
+        coEvery { addExpenseUseCase(any()) } returns Result.success(1L)
+        coEvery { checkBudgetAfterExpenseUseCase(any()) } returns true
+        val vm = createVm()
+        vm.onTitleChange("Coffee")
+        vm.onAmountChange("150.0")
+
+        vm.events.test {
+            vm.saveExpense()
+            advanceUntilIdle()
+            assertTrue(awaitItem() is AddExpenseUiEvent.BudgetExceeded)
+            assertEquals(AddExpenseUiEvent.NavigateBack, awaitItem())
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+
     // -------------------------------------------------------------------------
     // saveExpense — failure path
     // -------------------------------------------------------------------------
@@ -173,7 +177,7 @@ class AddExpenseViewModelTest {
     @Test
     fun `saveExpense emits ShowSnackbar on use case failure`() = runTest {
         coEvery { addExpenseUseCase(any()) } returns Result.failure(RuntimeException("Insert failed"))
-        val vm = AddExpenseViewModel(addExpenseUseCase)
+        val vm = createVm()
         vm.onTitleChange("Coffee")
         vm.onAmountChange("150.0")
 
@@ -186,9 +190,9 @@ class AddExpenseViewModelTest {
     }
 
     @Test
-    fun `saveExpense ShowSnackbar contains the exception message`() = runTest {
+    fun `saveExpense ShowSnackbar carries a non-zero resource id on failure`() = runTest {
         coEvery { addExpenseUseCase(any()) } returns Result.failure(RuntimeException("Insert failed"))
-        val vm = AddExpenseViewModel(addExpenseUseCase)
+        val vm = createVm()
         vm.onTitleChange("Coffee")
         vm.onAmountChange("150.0")
 
@@ -196,7 +200,7 @@ class AddExpenseViewModelTest {
             vm.saveExpense()
             advanceUntilIdle()
             val event = awaitItem() as AddExpenseUiEvent.ShowSnackbar
-            assertEquals("Insert failed", event.message)
+            assertNotEquals(0, event.messageRes)
             cancelAndIgnoreRemainingEvents()
         }
     }
@@ -204,7 +208,7 @@ class AddExpenseViewModelTest {
     @Test
     fun `saveExpense sets isLoading false after use case failure`() = runTest {
         coEvery { addExpenseUseCase(any()) } returns Result.failure(RuntimeException("Insert failed"))
-        val vm = AddExpenseViewModel(addExpenseUseCase)
+        val vm = createVm()
         vm.onTitleChange("Coffee")
         vm.onAmountChange("150.0")
 
@@ -220,7 +224,7 @@ class AddExpenseViewModelTest {
 
     @Test
     fun `saveExpense does not call use case when title is blank`() = runTest {
-        val vm = AddExpenseViewModel(addExpenseUseCase)
+        val vm = createVm()
         vm.onTitleChange("")
         vm.onAmountChange("100.0")
 
@@ -232,7 +236,7 @@ class AddExpenseViewModelTest {
 
     @Test
     fun `saveExpense stores title validation error when title is blank`() = runTest {
-        val vm = AddExpenseViewModel(addExpenseUseCase)
+        val vm = createVm()
         vm.onTitleChange("")
         vm.onAmountChange("100.0")
 
@@ -243,7 +247,7 @@ class AddExpenseViewModelTest {
 
     @Test
     fun `saveExpense does not emit NavigateBack when title is blank`() = runTest {
-        val vm = AddExpenseViewModel(addExpenseUseCase)
+        val vm = createVm()
         vm.onTitleChange("")
         vm.onAmountChange("100.0")
 
@@ -261,7 +265,7 @@ class AddExpenseViewModelTest {
 
     @Test
     fun `saveExpense does not call use case when amount is not a number`() = runTest {
-        val vm = AddExpenseViewModel(addExpenseUseCase)
+        val vm = createVm()
         vm.onTitleChange("Coffee")
         vm.onAmountChange("abc")
 
@@ -273,7 +277,7 @@ class AddExpenseViewModelTest {
 
     @Test
     fun `saveExpense does not call use case when amount is zero`() = runTest {
-        val vm = AddExpenseViewModel(addExpenseUseCase)
+        val vm = createVm()
         vm.onTitleChange("Coffee")
         vm.onAmountChange("0.0")
 
@@ -285,7 +289,7 @@ class AddExpenseViewModelTest {
 
     @Test
     fun `saveExpense does not call use case when amount is negative`() = runTest {
-        val vm = AddExpenseViewModel(addExpenseUseCase)
+        val vm = createVm()
         vm.onTitleChange("Coffee")
         vm.onAmountChange("-10.0")
 
@@ -297,7 +301,7 @@ class AddExpenseViewModelTest {
 
     @Test
     fun `saveExpense stores amount validation error when amount is invalid`() = runTest {
-        val vm = AddExpenseViewModel(addExpenseUseCase)
+        val vm = createVm()
         vm.onTitleChange("Coffee")
         vm.onAmountChange("not-a-number")
 
@@ -313,7 +317,7 @@ class AddExpenseViewModelTest {
     @Test
     fun `saveExpense passes trimmed title to use case`() = runTest {
         coEvery { addExpenseUseCase(any()) } returns Result.success(1L)
-        val vm = AddExpenseViewModel(addExpenseUseCase)
+        val vm = createVm()
         vm.onTitleChange("  Coffee  ")
         vm.onAmountChange("50.0")
 

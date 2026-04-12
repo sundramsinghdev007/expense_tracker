@@ -6,6 +6,7 @@
 
 set -e
 
+export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
 ADB="$HOME/Library/Android/sdk/platform-tools/adb"
 

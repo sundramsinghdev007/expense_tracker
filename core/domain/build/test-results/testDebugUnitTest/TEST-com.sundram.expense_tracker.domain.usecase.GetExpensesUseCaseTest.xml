@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sundram.expense_tracker.domain.usecase.GetExpensesUseCaseTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-04-11T16:42:08.028Z" hostname="Sundrams-MacBook-Pro.local" time="0.232">
+  <properties/>
+  <testcase name="invoke returns mapped flow from repository()" classname="com.sundram.expense_tracker.domain.usecase.GetExpensesUseCaseTest" time="0.212"/>
+  <testcase name="invoke emits empty list when repository is empty()" classname="com.sundram.expense_tracker.domain.usecase.GetExpensesUseCaseTest" time="0.017"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

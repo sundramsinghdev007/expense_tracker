@@ -5,6 +5,11 @@
         "matcher": "Edit|Write|Bash",
         "command": "code-review-graph update --skip-flows",
         "timeout": 5000
+      },
+      {
+        "matcher": "Edit|Write",
+        "command": "FILE=$(echo \"$CLAUDE_TOOL_INPUT\" | python3 -c \"import sys,json; d=json.load(sys.stdin); print(d.get('file_path',''))\" 2>/dev/null); [ -n \"$FILE\" ] && [ -f \"$FILE\" ] && bash scripts/check-violations.sh \"$FILE\" || true",
+        "timeout": 4000
       }
     ],
     "SessionStart": [
@@ -17,6 +22,10 @@
       {
         "command": "code-review-graph detect-changes --brief",
         "timeout": 10000
+      },
+      {
+        "command": "bash scripts/check-violations.sh",
+        "timeout": 8000
       }
     ]
   }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.7.2" type="partial_results">
+    <map id="UnusedResources">
+        <location id="R.string.ui_loading"
+            file="${:core:ui*debug*MAIN*sourceProvider*0*resDir*0}/values/strings.xml"
+            line="6"
+            column="13"
+            startOffset="196"
+            endLine="6"
+            endColumn="30"
+            endOffset="213"/>
+        <location id="R.string.ui_retry"
+            file="${:core:ui*debug*MAIN*sourceProvider*0*resDir*0}/values/strings.xml"
+            line="4"
+            column="13"
+            startOffset="112"
+            endLine="4"
+            endColumn="28"
+            endOffset="127"/>
+        <entry
+            name="model"
+            string="string[ui_retry(D),ui_back(U),ui_loading(D)];;;;"/>
+    </map>
+
+</incidents>

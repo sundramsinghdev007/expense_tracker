@@ -5,6 +5,7 @@
 
 set -e
 
+export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 ADB="$HOME/Library/Android/sdk/platform-tools/adb"
 PACKAGE="com.sundram.expense_tracker"
 APK="app/build/outputs/apk/debug/app-debug.apk"

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.7.2" type="incidents">
+
+    <incident
+        id="ModifierParameter"
+        severity="warning"
+        message="Modifier parameter should be the first optional parameter">
+        <location
+            file="${:core:ui*debug*MAIN*sourceProvider*0*javaDir*0}/com/sundram/expense_tracker/ui/component/ExpenseTrackerTopBar.kt"
+            line="21"
+            column="5"
+            startOffset="786"
+            endLine="21"
+            endColumn="13"
+            endOffset="794"/>
+    </incident>
+
+</incidents>

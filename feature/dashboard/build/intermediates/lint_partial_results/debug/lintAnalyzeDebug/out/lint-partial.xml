@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.7.2" type="partial_results">
+    <map id="UnusedResources">
+        <location id="R.string.dashboard_recent_expenses"
+            file="${:feature:dashboard*debug*MAIN*sourceProvider*0*resDir*0}/values/strings.xml"
+            line="11"
+            column="13"
+            startOffset="610"
+            endLine="11"
+            endColumn="45"
+            endOffset="642"/>
+        <location id="R.string.dashboard_scan_receipt_cd"
+            file="${:feature:dashboard*debug*MAIN*sourceProvider*0*resDir*0}/values/strings.xml"
+            line="10"
+            column="13"
+            startOffset="543"
+            endLine="10"
+            endColumn="45"
+            endOffset="575"/>
+        <entry
+            name="model"
+            string="string[dashboard_title(U),dashboard_total_this_month(U),dashboard_total_today(U),dashboard_total_this_year(U),dashboard_top_category_label(U),dashboard_empty_message(U),dashboard_add_expense_cd(U),dashboard_scan_receipt_cd(D),dashboard_recent_expenses(D),dashboard_retry_label(U),dashboard_amount_cd(U),dashboard_expense_amount_cd(U),dashboard_filter_day(U),dashboard_filter_month(U),dashboard_filter_year(U),dashboard_budget_alerts_title(U),dashboard_budget_alert_icon_cd(U),dashboard_budget_alert_amounts(U)];;;;"/>
+    </map>
+
+</incidents>

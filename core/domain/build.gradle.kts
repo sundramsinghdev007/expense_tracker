@@ -18,5 +18,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
 
     testImplementation(libs.bundles.testing)
-    testImplementation(libs.junit5.engine)
+    testRuntimeOnly(libs.junit5.engine)
+    testRuntimeOnly(libs.junit5.launcher)
 }

@@ -1,0 +1,13 @@
+R_DEF: Internal format may change without notice
+local
+string analytics_chart_category_title
+string analytics_chart_daily_title
+string analytics_no_data
+string analytics_period_month
+string analytics_period_week
+string analytics_period_year
+string analytics_title
+string analytics_total_spend_label
+string analytics_trend_down_cd
+string analytics_trend_flat_cd
+string analytics_trend_up_cd

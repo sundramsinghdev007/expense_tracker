@@ -2,6 +2,7 @@
 package com.sundram.expense_tracker.addexpense
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.compose.material3.SnackbarHostState
@@ -18,6 +19,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 private const val BUDGET_ALERT_CHANNEL_ID = "budget_alerts"
 
+// @SuppressLint: POST_NOTIFICATIONS permission is checked via canNotify before notify() is called.
+@SuppressLint("MissingPermission")
 @Composable
 fun AddExpenseScreen(
     onBack: () -> Unit,

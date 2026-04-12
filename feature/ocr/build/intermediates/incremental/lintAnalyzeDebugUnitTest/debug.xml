@@ -1,0 +1,26 @@
+<variant
+    name="debug"
+    package="com.sundram.expense_tracker.ocr"
+    minSdkVersion="26"
+    targetSdkVersion="26"
+    debuggable="true"
+    mergedManifest="build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml"
+    partialResultsDir="build/intermediates/unit_test_lint_partial_results/debug/lintAnalyzeDebugUnitTest/out"
+    desugaredMethodsFiles="/Users/sundramsingh/.gradle/caches/9.3.1/transforms/9803c480a770b462c3e2201bd2b44731/transformed/D8BackportedDesugaredMethods.txt">
+  <buildFeatures
+      namespacing="REQUIRED"/>
+  <sourceProviders>
+  </sourceProviders>
+  <testSourceProviders>
+    <sourceProvider
+        manifests="src/test/AndroidManifest.xml"
+        javaDirectories="src/test/java:src/testDebug/java:src/test/kotlin:src/testDebug/kotlin"
+        assetsDirectories="src/test/assets:src/testDebug/assets"
+        unitTest="true"/>
+  </testSourceProviders>
+  <testFixturesSourceProviders>
+  </testFixturesSourceProviders>
+  <artifact
+      type="UNIT_TEST">
+  </artifact>
+</variant>

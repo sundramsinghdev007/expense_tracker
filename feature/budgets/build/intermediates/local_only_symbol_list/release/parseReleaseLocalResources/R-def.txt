@@ -1,0 +1,14 @@
+R_DEF: Internal format may change without notice
+local
+string budgets_add_cd
+string budgets_add_title
+string budgets_category_label
+string budgets_empty
+string budgets_limit_amount_label
+string budgets_limit_label
+string budgets_over_budget
+string budgets_progress_cd
+string budgets_remaining_label
+string budgets_save
+string budgets_spent_label
+string budgets_title
