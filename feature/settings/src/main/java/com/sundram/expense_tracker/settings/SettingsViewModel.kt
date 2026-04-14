@@ -1,10 +1,14 @@
 // feature/settings/src/main/java/com/sundram/expense_tracker/settings/SettingsViewModel.kt
 package com.sundram.expense_tracker.settings
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.os.Build
+import android.os.Environment
 import android.provider.MediaStore
+import androidx.annotation.RequiresApi
+import java.io.File
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sundram.expense_tracker.domain.usecase.ExportExpensesUseCase
@@ -110,28 +114,38 @@ class SettingsViewModel @Inject constructor(
 
     private fun writeCsvToDownloads(csvContent: String) {
         val fileName = "expenses_${LocalDate.now()}.csv"
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            writeCsvViaMediaStore(fileName, csvContent)
+        } else {
+            writeCsvToExternalFiles(fileName, csvContent)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private fun writeCsvViaMediaStore(fileName: String, csvContent: String) {
         val contentValues = ContentValues().apply {
             put(MediaStore.Downloads.DISPLAY_NAME, fileName)
             put(MediaStore.Downloads.MIME_TYPE, "text/csv")
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                put(MediaStore.Downloads.IS_PENDING, 1)
-            }
+            put(MediaStore.Downloads.IS_PENDING, 1)
         }
         val resolver = context.contentResolver
-        val collection = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            MediaStore.Downloads.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
-        } else {
-            MediaStore.Downloads.EXTERNAL_CONTENT_URI
-        }
-        val uri = resolver.insert(collection, contentValues)
-            ?: error("MediaStore insert returned null — cannot write CSV")
+        val uri = resolver.insert(
+            MediaStore.Downloads.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY),
+            contentValues,
+        ) ?: error("MediaStore insert returned null — cannot write CSV")
         resolver.openOutputStream(uri)?.use { stream ->
             stream.write(csvContent.toByteArray(Charsets.UTF_8))
         } ?: error("Could not open output stream for CSV file")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            contentValues.clear()
-            contentValues.put(MediaStore.Downloads.IS_PENDING, 0)
-            resolver.update(uri, contentValues, null, null)
-        }
+        contentValues.clear()
+        contentValues.put(MediaStore.Downloads.IS_PENDING, 0)
+        resolver.update(uri, contentValues, null, null)
+    }
+
+    // API 26-28: write to app-scoped external files dir — no WRITE_EXTERNAL_STORAGE needed.
+    @SuppressLint("ObsoleteSdkInt")
+    private fun writeCsvToExternalFiles(fileName: String, csvContent: String) {
+        val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+            ?: error("External files directory not available")
+        File(dir, fileName).writeText(csvContent, Charsets.UTF_8)
     }
 }
