@@ -4,8 +4,11 @@ package com.sundram.expense_tracker.navigation
 object AppRoutes {
     const val DASHBOARD   = "dashboard"
     const val ADD_EXPENSE = "add_expense"
+    const val EDIT_EXPENSE = "edit_expense/{expenseId}"
     const val ANALYTICS   = "analytics"
     const val OCR         = "ocr"
     const val BUDGETS     = "budgets"
     const val SETTINGS    = "settings"
+
+    fun editExpense(id: Long) = "edit_expense/$id"
 }

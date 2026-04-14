@@ -18,6 +18,7 @@ import com.sundram.expense_tracker.ui.R
 fun ExpenseTrackerTopBar(
     title:    String,
     onBack:   (() -> Unit)? = null,
+    actions:  @Composable () -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     TopAppBar(
@@ -33,5 +34,6 @@ fun ExpenseTrackerTopBar(
                 }
             }
         },
+        actions = { actions() },
     )
 }

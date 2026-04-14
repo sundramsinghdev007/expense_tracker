@@ -21,4 +21,11 @@ local.properties
 .windsurfrules
 AGENTS.md
 GEMINI.md
-#scripts
+scripts
+.claude
+CLAUDE.md
+AUTOMATION.md
+GEMINI.md
+prompats.md
+USER_GUIDE.md
+.mcp.json

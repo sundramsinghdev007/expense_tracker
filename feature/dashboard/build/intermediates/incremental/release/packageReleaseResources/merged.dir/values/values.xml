@@ -13,6 +13,11 @@
     <string name="dashboard_recent_expenses">Recent Expenses</string>
     <string name="dashboard_retry_label">Retry</string>
     <string name="dashboard_scan_receipt_cd">Scan receipt</string>
+    <string name="dashboard_search_clear_cd">Clear search</string>
+    <string name="dashboard_search_empty_message">No expenses match your search.</string>
+    <string name="dashboard_search_hint">Search expenses…</string>
+    <string name="dashboard_search_history_remove_cd">Remove %s from history</string>
+    <string name="dashboard_search_history_title">Recent searches</string>
     <string name="dashboard_title">Dashboard</string>
     <string name="dashboard_top_category_label">Top category</string>
     <string name="dashboard_total_this_month">Total this month</string>

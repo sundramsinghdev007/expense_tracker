@@ -14,4 +14,11 @@
     <string name="add_expense_error_generic">Failed to save expense. Please try again.</string>
     <string name="add_expense_budget_exceeded_title">Budget Exceeded!</string>
     <string name="add_expense_budget_exceeded_body">Your %1$s budget limit has been reached.</string>
+    <string name="add_expense_edit_title">Edit Expense</string>
+    <string name="add_expense_update">Update Expense</string>
+    <string name="add_expense_delete">Delete</string>
+    <string name="add_expense_delete_cd">Delete expense</string>
+    <string name="add_expense_delete_cancel">Cancel</string>
+    <string name="add_expense_delete_confirm_title">Delete expense?</string>
+    <string name="add_expense_delete_confirm_body">This expense will be permanently removed.</string>
 </resources>

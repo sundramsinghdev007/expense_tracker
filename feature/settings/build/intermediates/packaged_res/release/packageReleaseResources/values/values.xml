@@ -3,7 +3,9 @@
     <string name="settings_close">Close</string>
     <string name="settings_currency_picker_title">Select Currency</string>
     <string name="settings_currency_title">Currency</string>
+    <string name="settings_export_error">Export failed —</string>
     <string name="settings_export_subtitle">Download as CSV</string>
+    <string name="settings_export_success">Expenses exported to Downloads</string>
     <string name="settings_export_title">Export Expenses</string>
     <string name="settings_notifications_off">Disabled</string>
     <string name="settings_notifications_on">Enabled</string>

@@ -1,7 +1,9 @@
 // feature/dashboard/src/test/java/com/sundram/expense_tracker/dashboard/DashboardViewModelTest.kt
 package com.sundram.expense_tracker.dashboard
 
+import android.content.Context
 import app.cash.turbine.test
+import com.sundram.expense_tracker.dashboard.data.getSearchHistory
 import com.sundram.expense_tracker.domain.model.Budget
 import com.sundram.expense_tracker.domain.model.Category
 import com.sundram.expense_tracker.domain.model.Expense
@@ -10,6 +12,7 @@ import com.sundram.expense_tracker.domain.usecase.GetBudgetsUseCase
 import com.sundram.expense_tracker.domain.usecase.GetExpensesUseCase
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.mockkStatic
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
@@ -33,12 +36,15 @@ class DashboardViewModelTest {
 
     private val testDispatcher = UnconfinedTestDispatcher()
 
+    private val context: Context = mockk(relaxed = true)
     private val getExpensesUseCase: GetExpensesUseCase = mockk()
     private val getBudgetsUseCase: GetBudgetsUseCase = mockk()
 
     @BeforeEach
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
+        mockkStatic("com.sundram.expense_tracker.dashboard.data.SearchHistoryDataStoreKt")
+        every { any<Context>().getSearchHistory() } returns flowOf(emptyList())
         every { getBudgetsUseCase(any()) } returns flowOf(emptyList())
     }
 
@@ -46,6 +52,8 @@ class DashboardViewModelTest {
     fun tearDown() {
         Dispatchers.resetMain()
     }
+
+    private fun createVm() = DashboardViewModel(context, getExpensesUseCase, getBudgetsUseCase)
 
     private fun expense(
         id: Long,
@@ -81,7 +89,7 @@ class DashboardViewModelTest {
         )
         every { getExpensesUseCase() } returns flowOf(expenses)
 
-        val vm = DashboardViewModel(getExpensesUseCase, getBudgetsUseCase)
+        val vm = createVm()
         advanceUntilIdle()
 
         assertEquals(300.0, vm.uiState.value.filteredTotal, 0.001)
@@ -95,7 +103,7 @@ class DashboardViewModelTest {
         )
         every { getExpensesUseCase() } returns flowOf(expenses)
 
-        val vm = DashboardViewModel(getExpensesUseCase, getBudgetsUseCase)
+        val vm = createVm()
         advanceUntilIdle()
 
         assertEquals(Category.FOOD, vm.uiState.value.topCategory)
@@ -105,7 +113,7 @@ class DashboardViewModelTest {
     fun `init sets isLoading false after expenses emit`() = runTest {
         every { getExpensesUseCase() } returns flowOf(emptyList())
 
-        val vm = DashboardViewModel(getExpensesUseCase, getBudgetsUseCase)
+        val vm = createVm()
         advanceUntilIdle()
 
         assertFalse(vm.uiState.value.isLoading)
@@ -115,7 +123,7 @@ class DashboardViewModelTest {
     fun `init sets errorMessage when flow throws`() = runTest {
         every { getExpensesUseCase() } returns flow { throw RuntimeException("DB error") }
 
-        val vm = DashboardViewModel(getExpensesUseCase, getBudgetsUseCase)
+        val vm = createVm()
         advanceUntilIdle()
 
         assertNotNull(vm.uiState.value.errorMessage)
@@ -125,7 +133,7 @@ class DashboardViewModelTest {
     fun `init emits isLoading true as initial state`() = runTest {
         every { getExpensesUseCase() } returns flowOf(emptyList())
 
-        val vm = DashboardViewModel(getExpensesUseCase, getBudgetsUseCase)
+        val vm = createVm()
 
         vm.uiState.test {
             val state = awaitItem()
@@ -141,7 +149,7 @@ class DashboardViewModelTest {
         }
         every { getExpensesUseCase() } returns flowOf(expenses)
 
-        val vm = DashboardViewModel(getExpensesUseCase, getBudgetsUseCase)
+        val vm = createVm()
         // Use Year filter so all 25 expenses (spread across ~25 days) are included
         vm.onFilterSelected(ExpenseFilter.Year)
         advanceUntilIdle()
@@ -159,7 +167,7 @@ class DashboardViewModelTest {
         val lastMonth = expense(2L, Category.FOOD, 200.0, daysAgo = 35)
         every { getExpensesUseCase() } returns flowOf(listOf(thisMonth, lastMonth))
 
-        val vm = DashboardViewModel(getExpensesUseCase, getBudgetsUseCase)
+        val vm = createVm()
         advanceUntilIdle()
 
         assertEquals(500.0, vm.uiState.value.filteredTotal, 0.001)
@@ -169,7 +177,7 @@ class DashboardViewModelTest {
     fun `topCategory is null when there are no expenses`() = runTest {
         every { getExpensesUseCase() } returns flowOf(emptyList())
 
-        val vm = DashboardViewModel(getExpensesUseCase, getBudgetsUseCase)
+        val vm = createVm()
         advanceUntilIdle()
 
         assertEquals(null, vm.uiState.value.topCategory)
@@ -179,7 +187,7 @@ class DashboardViewModelTest {
     fun `errorMessage contains the original exception message`() = runTest {
         every { getExpensesUseCase() } returns flow { throw RuntimeException("DB error") }
 
-        val vm = DashboardViewModel(getExpensesUseCase, getBudgetsUseCase)
+        val vm = createVm()
         advanceUntilIdle()
 
         assertEquals("DB error", vm.uiState.value.errorMessage)
@@ -191,7 +199,7 @@ class DashboardViewModelTest {
         val yesterdayExpense = expense(2L, Category.FOOD, 200.0, daysAgo = 1)
         every { getExpensesUseCase() } returns flowOf(listOf(todayExpense, yesterdayExpense))
 
-        val vm = DashboardViewModel(getExpensesUseCase, getBudgetsUseCase)
+        val vm = createVm()
         vm.onFilterSelected(ExpenseFilter.Day)
         advanceUntilIdle()
 
@@ -204,7 +212,7 @@ class DashboardViewModelTest {
         val lastMonthExpense = expense(2L, Category.FOOD, 200.0, daysAgo = 35)
         every { getExpensesUseCase() } returns flowOf(listOf(thisMonthExpense, lastMonthExpense))
 
-        val vm = DashboardViewModel(getExpensesUseCase, getBudgetsUseCase)
+        val vm = createVm()
         vm.onFilterSelected(ExpenseFilter.Year)
         advanceUntilIdle()
 
@@ -218,7 +226,7 @@ class DashboardViewModelTest {
         every { getExpensesUseCase() } returns flowOf(expenses)
         every { getBudgetsUseCase(any()) } returns flowOf(budgets)
 
-        val vm = DashboardViewModel(getExpensesUseCase, getBudgetsUseCase)
+        val vm = createVm()
         advanceUntilIdle()
 
         assertEquals(1, vm.uiState.value.budgetAlerts.size)
@@ -232,7 +240,7 @@ class DashboardViewModelTest {
         every { getExpensesUseCase() } returns flowOf(expenses)
         every { getBudgetsUseCase(any()) } returns flowOf(budgets)
 
-        val vm = DashboardViewModel(getExpensesUseCase, getBudgetsUseCase)
+        val vm = createVm()
         advanceUntilIdle()
 
         assertEquals(0, vm.uiState.value.budgetAlerts.size)

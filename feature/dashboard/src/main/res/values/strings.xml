@@ -18,4 +18,9 @@
     <string name="dashboard_budget_alerts_title">Budget Alerts</string>
     <string name="dashboard_budget_alert_icon_cd">Budget exceeded for %s</string>
     <string name="dashboard_budget_alert_amounts">₹%.0f spent of ₹%.0f limit</string>
+    <string name="dashboard_search_hint">Search expenses…</string>
+    <string name="dashboard_search_clear_cd">Clear search</string>
+    <string name="dashboard_search_empty_message">No expenses match your search.</string>
+    <string name="dashboard_search_history_title">Recent searches</string>
+    <string name="dashboard_search_history_remove_cd">Remove %s from history</string>
 </resources>

@@ -11,6 +11,11 @@ int string dashboard_filter_year 0x0
 int string dashboard_recent_expenses 0x0
 int string dashboard_retry_label 0x0
 int string dashboard_scan_receipt_cd 0x0
+int string dashboard_search_clear_cd 0x0
+int string dashboard_search_empty_message 0x0
+int string dashboard_search_hint 0x0
+int string dashboard_search_history_remove_cd 0x0
+int string dashboard_search_history_title 0x0
 int string dashboard_title 0x0
 int string dashboard_top_category_label 0x0
 int string dashboard_total_this_month 0x0

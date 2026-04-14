@@ -5,14 +5,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.sundram.expense_tracker.dashboard.DashboardScreen
+import androidx.navigation.navArgument
 import com.sundram.expense_tracker.addexpense.AddExpenseScreen
 import com.sundram.expense_tracker.analytics.AnalyticsScreen
-import com.sundram.expense_tracker.ocr.OcrScanScreen
 import com.sundram.expense_tracker.budgets.BudgetsScreen
+import com.sundram.expense_tracker.dashboard.DashboardScreen
+import com.sundram.expense_tracker.ocr.OcrScanScreen
 import com.sundram.expense_tracker.settings.SettingsScreen
 
 @Composable
@@ -32,10 +34,21 @@ fun AppNavHost() {
                 DashboardScreen(
                     onAddExpense  = { navController.navigate(AppRoutes.ADD_EXPENSE) },
                     onScanReceipt = { navController.navigate(AppRoutes.OCR) },
+                    onExpenseClick = { id -> navController.navigate(AppRoutes.editExpense(id)) },
                 )
             }
             composable(AppRoutes.ADD_EXPENSE) {
                 AddExpenseScreen(onBack = { navController.popBackStack() })
+            }
+            composable(
+                route = AppRoutes.EDIT_EXPENSE,
+                arguments = listOf(navArgument("expenseId") { type = NavType.LongType }),
+            ) { backStackEntry ->
+                val expenseId = backStackEntry.arguments?.getLong("expenseId") ?: -1L
+                AddExpenseScreen(
+                    onBack = { navController.popBackStack() },
+                    expenseId = expenseId,
+                )
             }
             composable(AppRoutes.ANALYTICS) {
                 AnalyticsScreen()

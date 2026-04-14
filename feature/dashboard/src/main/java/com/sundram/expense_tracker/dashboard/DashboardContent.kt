@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.sundram.expense_tracker.dashboard.component.BudgetAlertCard
+import com.sundram.expense_tracker.dashboard.component.DashboardSearchBar
 import com.sundram.expense_tracker.dashboard.component.ExpenseCard
 import com.sundram.expense_tracker.dashboard.component.FilterChipRow
 import com.sundram.expense_tracker.dashboard.component.SummaryHeader
@@ -33,6 +34,10 @@ fun DashboardContent(
     onScanReceipt: () -> Unit,
     onExpenseClick: (Long) -> Unit,
     onFilterSelected: (ExpenseFilter) -> Unit,
+    onSearchQueryChange: (String) -> Unit,
+    onSearchSubmit: (String) -> Unit,
+    onSearchHistoryItemClick: (String) -> Unit,
+    onSearchHistoryItemRemove: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -70,6 +75,16 @@ fun DashboardContent(
                         .padding(innerPadding),
                 ) {
                     item {
+                        DashboardSearchBar(
+                            query = uiState.searchQuery,
+                            onQueryChange = onSearchQueryChange,
+                            onSearchSubmit = onSearchSubmit,
+                            searchHistory = uiState.searchHistory,
+                            onHistoryItemClick = onSearchHistoryItemClick,
+                            onHistoryItemRemove = onSearchHistoryItemRemove,
+                        )
+                    }
+                    item {
                         FilterChipRow(
                             selectedFilter = uiState.selectedFilter,
                             onFilterSelected = onFilterSelected,
@@ -99,9 +114,15 @@ fun DashboardContent(
                     }
                     if (uiState.recentExpenses.isEmpty()) {
                         item {
+                            val emptyMessage = if (uiState.searchQuery.isNotEmpty()) {
+                                stringResource(R.string.dashboard_search_empty_message)
+                            } else {
+                                stringResource(R.string.dashboard_empty_message)
+                            }
+                            val emptyEmoji = if (uiState.searchQuery.isNotEmpty()) "🔍" else "💸"
                             EmptyState(
-                                message = stringResource(R.string.dashboard_empty_message),
-                                emoji = "💸",
+                                message = emptyMessage,
+                                emoji = emptyEmoji,
                                 modifier = Modifier.fillParentMaxSize(),
                             )
                         }

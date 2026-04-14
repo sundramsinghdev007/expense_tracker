@@ -5,6 +5,9 @@ import app.cash.turbine.test
 import com.sundram.expense_tracker.domain.model.Category
 import com.sundram.expense_tracker.domain.usecase.AddExpenseUseCase
 import com.sundram.expense_tracker.domain.usecase.CheckBudgetAfterExpenseUseCase
+import com.sundram.expense_tracker.domain.usecase.DeleteExpenseUseCase
+import com.sundram.expense_tracker.domain.usecase.GetExpenseByIdUseCase
+import com.sundram.expense_tracker.domain.usecase.UpdateExpenseUseCase
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -30,6 +33,9 @@ class AddExpenseViewModelTest {
     private val testDispatcher = UnconfinedTestDispatcher()
     private val addExpenseUseCase: AddExpenseUseCase = mockk()
     private val checkBudgetAfterExpenseUseCase: CheckBudgetAfterExpenseUseCase = mockk()
+    private val getExpenseByIdUseCase: GetExpenseByIdUseCase = mockk()
+    private val updateExpenseUseCase: UpdateExpenseUseCase = mockk()
+    private val deleteExpenseUseCase: DeleteExpenseUseCase = mockk()
 
     @BeforeEach
     fun setUp() {
@@ -42,7 +48,13 @@ class AddExpenseViewModelTest {
         Dispatchers.resetMain()
     }
 
-    private fun createVm() = AddExpenseViewModel(addExpenseUseCase, checkBudgetAfterExpenseUseCase)
+    private fun createVm() = AddExpenseViewModel(
+        addExpenseUseCase,
+        checkBudgetAfterExpenseUseCase,
+        getExpenseByIdUseCase,
+        updateExpenseUseCase,
+        deleteExpenseUseCase,
+    )
 
     // -------------------------------------------------------------------------
     // Initial state

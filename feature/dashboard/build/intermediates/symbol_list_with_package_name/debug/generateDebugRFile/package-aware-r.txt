@@ -12,6 +12,11 @@ string dashboard_filter_year
 string dashboard_recent_expenses
 string dashboard_retry_label
 string dashboard_scan_receipt_cd
+string dashboard_search_clear_cd
+string dashboard_search_empty_message
+string dashboard_search_hint
+string dashboard_search_history_remove_cd
+string dashboard_search_history_title
 string dashboard_title
 string dashboard_top_category_label
 string dashboard_total_this_month

@@ -1,9 +1,17 @@
 // feature/settings/src/main/java/com/sundram/expense_tracker/settings/SettingsViewModel.kt
 package com.sundram.expense_tracker.settings
 
+import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Context
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
+import androidx.annotation.RequiresApi
+import java.io.File
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sundram.expense_tracker.domain.usecase.ExportExpensesUseCase
 import com.sundram.expense_tracker.settings.data.getCurrencyCode
 import com.sundram.expense_tracker.settings.data.getIsDarkTheme
 import com.sundram.expense_tracker.settings.data.getNotificationsEnabled
@@ -13,6 +21,7 @@ import com.sundram.expense_tracker.settings.data.setNotificationsEnabled
 import com.sundram.expense_tracker.settings.data.settingsDataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import java.time.LocalDate
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -24,6 +33,7 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
+    private val exportExpensesUseCase: ExportExpensesUseCase,
 ) : ViewModel() {
 
     private val dataStore = context.settingsDataStore
@@ -86,7 +96,56 @@ class SettingsViewModel @Inject constructor(
 
     fun onExportCsv(): Unit {
         viewModelScope.launch {
-            // TODO: implement CSV export
+            _uiState.update { it.copy(exportLoading = true, exportError = null) }
+            exportExpensesUseCase()
+                .mapCatching { csvContent -> writeCsvToDownloads(csvContent) }
+                .onSuccess {
+                    _uiState.update { it.copy(exportLoading = false, exportSuccess = true) }
+                }
+                .onFailure { error ->
+                    _uiState.update { it.copy(exportLoading = false, exportError = error.message) }
+                }
         }
+    }
+
+    fun onExportDismiss(): Unit {
+        _uiState.update { it.copy(exportSuccess = false, exportError = null) }
+    }
+
+    private fun writeCsvToDownloads(csvContent: String) {
+        val fileName = "expenses_${LocalDate.now()}.csv"
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            writeCsvViaMediaStore(fileName, csvContent)
+        } else {
+            writeCsvToExternalFiles(fileName, csvContent)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private fun writeCsvViaMediaStore(fileName: String, csvContent: String) {
+        val contentValues = ContentValues().apply {
+            put(MediaStore.Downloads.DISPLAY_NAME, fileName)
+            put(MediaStore.Downloads.MIME_TYPE, "text/csv")
+            put(MediaStore.Downloads.IS_PENDING, 1)
+        }
+        val resolver = context.contentResolver
+        val uri = resolver.insert(
+            MediaStore.Downloads.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY),
+            contentValues,
+        ) ?: error("MediaStore insert returned null — cannot write CSV")
+        resolver.openOutputStream(uri)?.use { stream ->
+            stream.write(csvContent.toByteArray(Charsets.UTF_8))
+        } ?: error("Could not open output stream for CSV file")
+        contentValues.clear()
+        contentValues.put(MediaStore.Downloads.IS_PENDING, 0)
+        resolver.update(uri, contentValues, null, null)
+    }
+
+    // API 26-28: write to app-scoped external files dir — no WRITE_EXTERNAL_STORAGE needed.
+    @SuppressLint("ObsoleteSdkInt")
+    private fun writeCsvToExternalFiles(fileName: String, csvContent: String) {
+        val dir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+            ?: error("External files directory not available")
+        File(dir, fileName).writeText(csvContent, Charsets.UTF_8)
     }
 }
