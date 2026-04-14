@@ -8,12 +8,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -35,6 +43,9 @@ fun AddExpenseContent(
     onNotesChange: (String) -> Unit,
     onSave: () -> Unit,
     onBack: () -> Unit,
+    onDeleteClick: () -> Unit,
+    onDeleteConfirm: () -> Unit,
+    onDeleteDismiss: () -> Unit,
     snackbarHostState: SnackbarHostState,
     modifier: Modifier = Modifier,
 ) {
@@ -42,8 +53,22 @@ fun AddExpenseContent(
         modifier = modifier,
         topBar = {
             ExpenseTrackerTopBar(
-                title = stringResource(R.string.add_expense_title),
+                title = stringResource(
+                    if (uiState.isEditMode) R.string.add_expense_edit_title
+                    else R.string.add_expense_title
+                ),
                 onBack = onBack,
+                actions = {
+                    if (uiState.isEditMode) {
+                        IconButton(onClick = onDeleteClick, enabled = !uiState.isLoading) {
+                            Icon(
+                                imageVector = Icons.Default.Delete,
+                                contentDescription = stringResource(R.string.add_expense_delete_cd),
+                                tint = MaterialTheme.colorScheme.error,
+                            )
+                        }
+                    }
+                },
             )
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
@@ -102,8 +127,36 @@ fun AddExpenseContent(
                 modifier = Modifier.fillMaxWidth(),
                 enabled = !uiState.isLoading,
             ) {
-                Text(stringResource(R.string.add_expense_save))
+                Text(
+                    stringResource(
+                        if (uiState.isEditMode) R.string.add_expense_update
+                        else R.string.add_expense_save
+                    )
+                )
             }
         }
+    }
+
+    if (uiState.showDeleteDialog) {
+        AlertDialog(
+            onDismissRequest = onDeleteDismiss,
+            title = { Text(stringResource(R.string.add_expense_delete_confirm_title)) },
+            text = { Text(stringResource(R.string.add_expense_delete_confirm_body)) },
+            confirmButton = {
+                TextButton(
+                    onClick = onDeleteConfirm,
+                    colors = ButtonDefaults.textButtonColors(
+                        contentColor = MaterialTheme.colorScheme.error,
+                    ),
+                ) {
+                    Text(stringResource(R.string.add_expense_delete))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = onDeleteDismiss) {
+                    Text(stringResource(R.string.add_expense_delete_cancel))
+                }
+            },
+        )
     }
 }

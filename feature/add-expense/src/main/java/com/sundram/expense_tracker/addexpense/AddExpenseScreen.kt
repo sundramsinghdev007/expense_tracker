@@ -24,16 +24,22 @@ private const val BUDGET_ALERT_CHANNEL_ID = "budget_alerts"
 @Composable
 fun AddExpenseScreen(
     onBack: () -> Unit,
+    expenseId: Long = -1L,
     viewModel: AddExpenseViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
 
+    LaunchedEffect(expenseId) {
+        if (expenseId != -1L) viewModel.loadExpense(expenseId)
+    }
+
     LaunchedEffect(Unit) {
         viewModel.events.collect { event ->
             when (event) {
                 is AddExpenseUiEvent.NavigateBack -> onBack()
+                is AddExpenseUiEvent.Deleted -> onBack()
                 is AddExpenseUiEvent.ShowSnackbar ->
                     snackbarHostState.showSnackbar(context.getString(event.messageRes))
                 is AddExpenseUiEvent.BudgetExceeded -> {
@@ -65,14 +71,17 @@ fun AddExpenseScreen(
     }
 
     AddExpenseContent(
-        uiState = uiState,
-        onTitleChange = viewModel::onTitleChange,
-        onAmountChange = viewModel::onAmountChange,
-        onCategoryChange = viewModel::onCategoryChange,
-        onDateChange = viewModel::onDateChange,
-        onNotesChange = viewModel::onNotesChange,
-        onSave = viewModel::saveExpense,
-        onBack = onBack,
+        uiState           = uiState,
+        onTitleChange     = viewModel::onTitleChange,
+        onAmountChange    = viewModel::onAmountChange,
+        onCategoryChange  = viewModel::onCategoryChange,
+        onDateChange      = viewModel::onDateChange,
+        onNotesChange     = viewModel::onNotesChange,
+        onSave            = viewModel::saveExpense,
+        onBack            = onBack,
+        onDeleteClick     = viewModel::showDeleteConfirm,
+        onDeleteConfirm   = viewModel::deleteExpense,
+        onDeleteDismiss   = viewModel::dismissDeleteConfirm,
         snackbarHostState = snackbarHostState,
     )
 }

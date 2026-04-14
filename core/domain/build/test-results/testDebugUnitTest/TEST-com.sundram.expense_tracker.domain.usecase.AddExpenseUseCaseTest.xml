@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.sundram.expense_tracker.domain.usecase.AddExpenseUseCaseTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-04-11T16:42:03.381Z" hostname="Sundrams-MacBook-Pro.local" time="4.359">
+<testsuite name="com.sundram.expense_tracker.domain.usecase.AddExpenseUseCaseTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-04-14T01:54:25.689Z" hostname="Sundrams-MacBook-Pro.local" time="1.491">
   <properties/>
-  <testcase name="invoke returns failure when amount is zero()" classname="com.sundram.expense_tracker.domain.usecase.AddExpenseUseCaseTest" time="0.727"/>
-  <testcase name="invoke returns failure when amount is negative()" classname="com.sundram.expense_tracker.domain.usecase.AddExpenseUseCaseTest" time="0.007"/>
-  <testcase name="invoke emits success with valid expense()" classname="com.sundram.expense_tracker.domain.usecase.AddExpenseUseCaseTest" time="0.014"/>
-  <testcase name="invoke returns failure when title is blank()" classname="com.sundram.expense_tracker.domain.usecase.AddExpenseUseCaseTest" time="0.004"/>
+  <testcase name="invoke returns failure when amount is zero()" classname="com.sundram.expense_tracker.domain.usecase.AddExpenseUseCaseTest" time="0.183"/>
+  <testcase name="invoke returns failure when amount is negative()" classname="com.sundram.expense_tracker.domain.usecase.AddExpenseUseCaseTest" time="0.003"/>
+  <testcase name="invoke emits success with valid expense()" classname="com.sundram.expense_tracker.domain.usecase.AddExpenseUseCaseTest" time="0.009"/>
+  <testcase name="invoke returns failure when title is blank()" classname="com.sundram.expense_tracker.domain.usecase.AddExpenseUseCaseTest" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

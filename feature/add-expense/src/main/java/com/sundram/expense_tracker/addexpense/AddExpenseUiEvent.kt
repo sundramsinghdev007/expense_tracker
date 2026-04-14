@@ -5,6 +5,7 @@ import androidx.annotation.StringRes
 
 sealed class AddExpenseUiEvent {
     data object NavigateBack : AddExpenseUiEvent()
+    data object Deleted : AddExpenseUiEvent()
     data class ShowSnackbar(@StringRes val messageRes: Int) : AddExpenseUiEvent()
     data class BudgetExceeded(val categoryName: String) : AddExpenseUiEvent()
 }

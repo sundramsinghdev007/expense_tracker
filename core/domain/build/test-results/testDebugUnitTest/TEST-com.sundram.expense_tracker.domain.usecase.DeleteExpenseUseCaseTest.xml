@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.sundram.expense_tracker.domain.usecase.DeleteExpenseUseCaseTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-04-11T16:42:07.744Z" hostname="Sundrams-MacBook-Pro.local" time="0.275">
+<testsuite name="com.sundram.expense_tracker.domain.usecase.DeleteExpenseUseCaseTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-04-14T01:54:27.182Z" hostname="Sundrams-MacBook-Pro.local" time="0.042">
   <properties/>
-  <testcase name="invoke calls repository delete with correct expense()" classname="com.sundram.expense_tracker.domain.usecase.DeleteExpenseUseCaseTest" time="0.273"/>
+  <testcase name="invoke calls repository delete with correct expense()" classname="com.sundram.expense_tracker.domain.usecase.DeleteExpenseUseCaseTest" time="0.041"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

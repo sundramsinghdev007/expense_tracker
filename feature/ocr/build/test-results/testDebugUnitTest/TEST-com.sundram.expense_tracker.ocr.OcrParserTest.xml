@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.sundram.expense_tracker.ocr.OcrParserTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-04-11T16:42:07.862Z" hostname="Sundrams-MacBook-Pro.local" time="0.297">
+<testsuite name="com.sundram.expense_tracker.ocr.OcrParserTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-04-14T01:54:25.683Z" hostname="Sundrams-MacBook-Pro.local" time="0.134">
   <properties/>
-  <testcase name="skips blank lines before capitalised line()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.224"/>
-  <testcase name="extracts first capitalised line()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.003"/>
-  <testcase name="returns null for no amount here()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.002"/>
-  <testcase name="returns 99_99 for Rs 99_99()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.003"/>
-  <testcase name="parses MMM DD YYYY()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.039"/>
+  <testcase name="skips blank lines before capitalised line()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.068"/>
+  <testcase name="extracts first capitalised line()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.001"/>
+  <testcase name="returns null for no amount here()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.006"/>
+  <testcase name="returns 99_99 for Rs 99_99()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.008"/>
+  <testcase name="parses MMM DD YYYY()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.03"/>
   <testcase name="returns null for blank input()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.001"/>
   <testcase name="returns null for unparseable string()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.001"/>
   <testcase name="parses DD slash MM slash YYYY()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.001"/>
-  <testcase name="parses DD dash MM dash YYYY()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.0"/>
+  <testcase name="parses DD dash MM dash YYYY()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.001"/>
   <testcase name="returns 250_00 for rupee symbol 250_00()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.001"/>
   <testcase name="returns null for empty string - amount()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.001"/>
-  <testcase name="returns 1500 for Total 1500()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.0"/>
-  <testcase name="returns null for empty string - date()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.001"/>
+  <testcase name="returns 1500 for Total 1500()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.001"/>
+  <testcase name="returns null for empty string - date()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.0"/>
   <testcase name="returns null for whitespace only()" classname="com.sundram.expense_tracker.ocr.OcrParserTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

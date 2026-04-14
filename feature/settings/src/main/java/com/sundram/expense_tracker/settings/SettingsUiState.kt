@@ -7,4 +7,7 @@ data class SettingsUiState(
     val notificationsEnabled: Boolean = true,
     val appVersion: String = "",
     val showCurrencyDialog: Boolean = false,
+    val exportLoading: Boolean = false,
+    val exportSuccess: Boolean = false,
+    val exportError: String? = null,
 )

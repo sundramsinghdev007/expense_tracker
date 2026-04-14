@@ -6,10 +6,17 @@ int string add_expense_budget_exceeded_title 0x0
 int string add_expense_category_label 0x0
 int string add_expense_date_label 0x0
 int string add_expense_date_picker_cd 0x0
+int string add_expense_delete 0x0
+int string add_expense_delete_cancel 0x0
+int string add_expense_delete_cd 0x0
+int string add_expense_delete_confirm_body 0x0
+int string add_expense_delete_confirm_title 0x0
+int string add_expense_edit_title 0x0
 int string add_expense_error_generic 0x0
 int string add_expense_notes_label 0x0
 int string add_expense_save 0x0
 int string add_expense_title 0x0
 int string add_expense_title_label 0x0
+int string add_expense_update 0x0
 int string add_expense_validation_amount_invalid 0x0
 int string add_expense_validation_title_blank 0x0

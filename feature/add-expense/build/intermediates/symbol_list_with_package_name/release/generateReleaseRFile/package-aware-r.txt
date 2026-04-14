@@ -7,10 +7,17 @@ string add_expense_budget_exceeded_title
 string add_expense_category_label
 string add_expense_date_label
 string add_expense_date_picker_cd
+string add_expense_delete
+string add_expense_delete_cancel
+string add_expense_delete_cd
+string add_expense_delete_confirm_body
+string add_expense_delete_confirm_title
+string add_expense_edit_title
 string add_expense_error_generic
 string add_expense_notes_label
 string add_expense_save
 string add_expense_title
 string add_expense_title_label
+string add_expense_update
 string add_expense_validation_amount_invalid
 string add_expense_validation_title_blank

@@ -18,6 +18,7 @@ fun SettingsScreen(
         onDarkThemeChange     = viewModel::onDarkThemeChange,
         onNotificationsChange = viewModel::onNotificationsChange,
         onExportCsv           = viewModel::onExportCsv,
+        onExportDismiss       = viewModel::onExportDismiss,
         onCurrencySelected    = viewModel::onCurrencyChange,
         onDismissDialog       = viewModel::hideDialog,
     )

@@ -15,4 +15,6 @@ data class DashboardUiState(
     val errorMessage: String? = null,
     val selectedFilter: ExpenseFilter = ExpenseFilter.Month,
     val budgetAlerts: List<Budget> = emptyList(),
+    val searchQuery: String = "",
+    val searchHistory: List<String> = emptyList(),
 )

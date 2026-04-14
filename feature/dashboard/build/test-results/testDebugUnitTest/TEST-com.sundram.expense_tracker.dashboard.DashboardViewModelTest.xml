@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-04-11T12:36:35.881Z" hostname="Sundrams-MacBook-Pro.local" time="0.842">
+<testsuite name="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-04-14T01:55:50.082Z" hostname="Sundrams-MacBook-Pro.local" time="2.052">
   <properties/>
-  <testcase name="init loads expenses and computes filteredTotal correctly()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.25"/>
-  <testcase name="filteredTotal excludes expenses from previous months when filter is Month()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.004"/>
-  <testcase name="onFilterSelected Year includes expenses from all months this year()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.003"/>
-  <testcase name="topCategory is null when there are no expenses()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.002"/>
-  <testcase name="budgetAlerts is empty when spending is within limit()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.003"/>
-  <testcase name="onFilterSelected Day filters to today only()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.007"/>
-  <testcase name="errorMessage contains the original exception message()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.007"/>
+  <testcase name="init loads expenses and computes filteredTotal correctly()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.302"/>
+  <testcase name="filteredTotal excludes expenses from previous months when filter is Month()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.006"/>
+  <testcase name="onFilterSelected Year includes expenses from all months this year()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.009"/>
+  <testcase name="topCategory is null when there are no expenses()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.008"/>
+  <testcase name="budgetAlerts is empty when spending is within limit()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.011"/>
+  <testcase name="onFilterSelected Day filters to today only()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.005"/>
+  <testcase name="errorMessage contains the original exception message()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.009"/>
   <testcase name="init sets isLoading false after expenses emit()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.004"/>
-  <testcase name="budgetAlerts shows categories where actual spending exceeds limit()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.003"/>
-  <testcase name="init sets topCategory to the category with highest spend()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.002"/>
-  <testcase name="init recentExpenses contains at most 20 items sorted descending by date()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.003"/>
-  <testcase name="init emits isLoading true as initial state()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.012"/>
-  <testcase name="init sets errorMessage when flow throws()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.003"/>
+  <testcase name="budgetAlerts shows categories where actual spending exceeds limit()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.005"/>
+  <testcase name="init sets topCategory to the category with highest spend()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.005"/>
+  <testcase name="init recentExpenses contains at most 20 items sorted descending by date()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.011"/>
+  <testcase name="init emits isLoading true as initial state()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.022"/>
+  <testcase name="init sets errorMessage when flow throws()" classname="com.sundram.expense_tracker.dashboard.DashboardViewModelTest" time="0.008"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

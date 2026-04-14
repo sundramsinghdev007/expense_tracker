@@ -2,7 +2,9 @@ com.sundram.expense_tracker.settings
 string settings_close
 string settings_currency_picker_title
 string settings_currency_title
+string settings_export_error
 string settings_export_subtitle
+string settings_export_success
 string settings_export_title
 string settings_notifications_off
 string settings_notifications_on

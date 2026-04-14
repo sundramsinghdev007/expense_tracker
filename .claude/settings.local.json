@@ -24,7 +24,11 @@
       "Bash(git status*)",
       "Bash(find . -name*)",
       "Read(//Users/sundramsingh/**)",
-      "Read(//Library/Java/JavaVirtualMachines/**)"
+      "Read(//Library/Java/JavaVirtualMachines/**)",
+      "Bash(git fetch:*)",
+      "Bash(git pull:*)",
+      "Bash(git checkout:*)",
+      "Bash(git stash:*)"
     ]
   },
   "enabledPlugins": {

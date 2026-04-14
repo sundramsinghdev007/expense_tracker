@@ -10,6 +10,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 fun DashboardScreen(
     onAddExpense: () -> Unit,
     onScanReceipt: () -> Unit,
+    onExpenseClick: (Long) -> Unit = {},
     viewModel: DashboardViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -18,7 +19,11 @@ fun DashboardScreen(
         uiState = uiState,
         onAddExpense = onAddExpense,
         onScanReceipt = onScanReceipt,
-        onExpenseClick = { /* navigation handled by caller */ },
+        onExpenseClick = onExpenseClick,
         onFilterSelected = viewModel::onFilterSelected,
+        onSearchQueryChange = viewModel::onSearchQueryChange,
+        onSearchSubmit = viewModel::onSearchSubmit,
+        onSearchHistoryItemClick = viewModel::onSearchHistoryItemClick,
+        onSearchHistoryItemRemove = viewModel::onSearchHistoryItemRemove,
     )
 }

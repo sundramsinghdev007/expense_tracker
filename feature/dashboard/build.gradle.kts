@@ -14,6 +14,7 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:common"))
     implementation(project(":core:ui"))
+    implementation(libs.androidx.datastore.preferences)
 
     testImplementation(libs.bundles.testing)
     testRuntimeOnly(libs.junit5.engine)
